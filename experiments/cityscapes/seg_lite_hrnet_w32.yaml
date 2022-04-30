@@ -1,0 +1,89 @@
+CUDNN:
+  BENCHMARK: true
+  DETERMINISTIC: false
+  ENABLED: true
+GPUS: (0,)
+OUTPUT_DIR: 'output_lite'
+LOG_DIR: 'log'
+WORKERS: 16
+PRINT_FREQ: 100
+
+DATASET:
+  DATASET: cityscapes
+  ROOT: '../data/list/cityscapes/'
+  TEST_SET: 'val.lst'
+  TRAIN_SET: 'train.lst'
+  NUM_CLASSES: 19
+MODEL:
+  NAME: seg_litehrnet
+  ALIGN_CORNERS: false
+  PRETRAINED: null
+  EXTRA:
+    in_channels: 3
+    stem:
+      stem_channels: 32
+      out_channels: 32
+      expand_ratio: 1
+    num_stages: 3
+    stages_spec:
+      num_modules:
+      - 3
+      - 8
+      - 3
+      num_branches:
+      - 2
+      - 3
+      - 4
+      num_blocks:
+      - 2
+      - 2
+      - 2
+      module_type: 
+      - LITE
+      - LITE
+      - LITE
+      with_fuse:
+      - true
+      - true
+      - true
+      reduce_ratios:
+      - 8
+      - 8
+      - 8
+      num_channels: 
+      - [40, 80]
+      - [40, 80, 160]
+      - [40, 80, 160, 320]
+    with_head: true
+LOSS:
+  USE_OHEM: false
+  OHEMTHRES: 0.9
+  OHEMKEEP: 131072
+TRAIN:
+  IMAGE_SIZE:
+  - 1024
+  - 512
+  BASE_SIZE: 2048
+  BATCH_SIZE_PER_GPU: 4
+  SHUFFLE: true
+  BEGIN_EPOCH: 0
+  END_EPOCH: 484
+  RESUME: true
+  OPTIMIZER: sgd
+  LR: 0.01
+  WD: 0.0005
+  MOMENTUM: 0.9
+  NESTEROV: false
+  FLIP: true
+  MULTI_SCALE: true
+  DOWNSAMPLERATE: 1
+  IGNORE_LABEL: 255
+  SCALE_FACTOR: 16
+TEST:
+  IMAGE_SIZE:
+  - 2048
+  - 1024
+  BASE_SIZE: 2048
+  BATCH_SIZE_PER_GPU: 4
+  FLIP_TEST: false
+  MULTI_SCALE: false
