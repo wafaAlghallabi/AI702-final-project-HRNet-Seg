@@ -78,13 +78,9 @@ For lite-HRNet, we added the following files:
 
 ## Training
 
-````
-#### Training
-
 1. Specify the training script in `tools/`.
   a. For trainig the (hrnet) models use the `tools/train.py`.
   b. For trainig the (lite-hrnet) models use the `tools/lite-train.py`.
-  
 2. Specify the configuration file (.yaml) of the experiment in `experiments/cityscapes`.
 
 
@@ -94,6 +90,7 @@ Training HRNet-W32 on Cityscapes with a batch size of 8:
 ````bash
 python tools/train.py --cfg experiments/cityscapes/seg_hrnet_w32.yaml
 ````
+
 Training Lite-HRNet-W32 on Cityscapes with a batch size of 8:
 ````bash
 python tools/lite_train.py --cfg experiments/cityscapes/seg_lite_hrnet_w32.yaml
