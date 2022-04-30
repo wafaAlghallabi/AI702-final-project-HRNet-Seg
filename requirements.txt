@@ -1,3 +1,4 @@
+PyTorch=1.1.0.
 EasyDict==1.7
 shapely
 Cython
@@ -10,4 +11,8 @@ yacs>=0.1.5
 tensorboardX>=1.6
 tqdm
 ninja
-
+mmcv
+tensorboardX==2.0
+thop
+json_tricks
+xtcocotools
